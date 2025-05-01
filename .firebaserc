@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "nextjs-auth-demo-9c444"
-  }
+    "default": "nextjs-auth-demo-9c444",
+    "nextjs-auth-demo": "nextjs-auth-demo-9c444"
+  },
+  "targets": {},
+  "etags": {}
 }
