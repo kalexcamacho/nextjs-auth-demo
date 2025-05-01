@@ -1,14 +1,19 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDAVFtTFqqvL_SUemaMs1BwuZSWhrB2_J0",
-  authDomain: "nextjs-auth-demo-432de.firebaseapp.com",
-  projectId: "nextjs-auth-demo-432de",
-  storageBucket: "nextjs-auth-demo-432de.firebasestorage.app",
-  messagingSenderId: "338183565115",
-  appId: "1:338183565115:web:e8d49602631845ab8e511e",
+  apiKey: "AIzaSyAo5xKnaqKxaIiq06pMkUVCDGxQxGfMfco",
+  authDomain: "nextjs-auth-demo-9c444.firebaseapp.com",
+  projectId: "nextjs-auth-demo-9c444",
+  storageBucket: "nextjs-auth-demo-9c444.firebasestorage.app",
+  messagingSenderId: "1057776835340",
+  appId: "1:1057776835340:web:48833422571af60f3b8729"
 };
 
 const app = initializeApp(firebaseConfig);
+
 export const auth = getAuth(app);
+
+if (process.env.NODE_ENV === "development") {
+  connectAuthEmulator(auth, "http://localhost:9099");
+}
