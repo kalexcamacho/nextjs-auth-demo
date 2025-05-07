@@ -20,6 +20,7 @@ export default function LoginWithPhone() {
   const [confirmation, setConfirmation] = useState<ConfirmationResult | null>(
     null
   );
+  const [recaptchaSolved, setRecaptchaSolved] = useState(false);
 
   useEffect(() => {
     if (!window.recaptchaVerifier) {
@@ -30,6 +31,7 @@ export default function LoginWithPhone() {
           size: "normal",
           callback: () => {
             console.log("reCAPTCHA solved. Proceeding with OTP.");
+            setRecaptchaSolved(true);
           },
         }
       );
@@ -68,6 +70,7 @@ export default function LoginWithPhone() {
       />
       <button
         onClick={sendOtp}
+        disabled={!recaptchaSolved}
         className="bg-yellow-500 text-white px-4 py-2 rounded"
       >
         Send OTP
@@ -89,7 +92,7 @@ export default function LoginWithPhone() {
           </button>
         </>
       )}
-      <div id="recaptcha-container" />
+      <div id="recaptcha-container" data-testid="recaptcha-container" />
     </div>
   );
 }
