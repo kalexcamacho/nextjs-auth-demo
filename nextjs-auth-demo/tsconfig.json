@@ -15,7 +15,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "incremental": true,
     "plugins": [
       {
@@ -27,7 +27,11 @@
         "./src/*"
       ]
     },
-    "types": ["@testing-library/jest-dom", "jest"]
+    "types": [
+      "@testing-library/jest-dom",
+      "jest",
+      "@playwright/test"
+    ]
   },
   "include": [
     "**/*.ts",

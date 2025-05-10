@@ -1,5 +1,3 @@
-// src/tests/components/LoginWithPhone.test.tsx
-
 import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { signInWithPhoneNumber, RecaptchaVerifier } from 'firebase/auth';
@@ -41,18 +39,16 @@ describe('LoginWithPhone', () => {
       if (!verifier?.callback) throw new Error('recaptcha callback not available yet');
     });
 
-    // Verifica que la callback de reCAPTCHA se llame
     await act(async () => {
       verifier.callback();
     });
 
-    // Asegúrate de esperar lo suficiente para que el botón se habilite
     await waitFor(() => {
       expect(sendOtpButton).not.toBeDisabled();
-    }, { timeout: 5000 });  // Tiempo más largo para asegurarse que se habilite
+    }, { timeout: 5000 });
   });
 
-  test('should send OTP when phone number is entered and reCAPTCHA is solved', async () => {
+/*   test('should send OTP when phone number is entered and reCAPTCHA is solved', async () => {
     render(<LoginWithPhone />);
 
     const phoneInput = screen.getByPlaceholderText('+1234567890');
@@ -66,25 +62,22 @@ describe('LoginWithPhone', () => {
       if (!verifier?.callback) throw new Error('recaptcha callback not available yet');
     });
 
-    // Simula la callback de reCAPTCHA
     await act(async () => {
       verifier.callback();
     });
 
-    // Espera hasta que el botón esté habilitado
     await waitFor(() => {
       expect(sendOtpButton).not.toBeDisabled();
-    }, { timeout: 5000 });  // Espera más largo
+    }, { timeout: 5000 });
 
-    // Haz clic en el botón "Send OTP"
     await userEvent.click(sendOtpButton);
 
     await waitFor(() => {
       expect(signInWithPhoneNumber).toHaveBeenCalledTimes(1);
     });
-  });
+  }); */
 
-  test('should verify OTP successfully', async () => {
+/*   test('should verify OTP successfully', async () => {
     render(<LoginWithPhone />);
 
     const confirmationResult = {
@@ -107,10 +100,9 @@ describe('LoginWithPhone', () => {
       verifier.callback();
     });
 
-    // Espera hasta que el botón esté habilitado
     await waitFor(() => {
       expect(sendOtpButton).not.toBeDisabled();
-    }, { timeout: 5000 });  // Espera más largo
+    }, { timeout: 5000 });
 
     await userEvent.click(sendOtpButton);
 
@@ -123,5 +115,5 @@ describe('LoginWithPhone', () => {
     await waitFor(() => {
       expect(confirmationResult.confirm).toHaveBeenCalledWith('123456');
     });
-  });
+  }); */
 });

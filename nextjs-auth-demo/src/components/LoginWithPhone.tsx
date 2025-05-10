@@ -17,25 +17,36 @@ declare global {
 export default function LoginWithPhone() {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
-  const [confirmation, setConfirmation] = useState<ConfirmationResult | null>(
-    null
-  );
+  const [confirmation, setConfirmation] = useState<ConfirmationResult | null>(null);
   const [recaptchaSolved, setRecaptchaSolved] = useState(false);
 
   useEffect(() => {
-    if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        auth,
-        "recaptcha-container",
-        {
-          size: "normal",
-          callback: () => {
-            console.log("reCAPTCHA solved. Proceeding with OTP.");
-            setRecaptchaSolved(true);
-          },
-        }
-      );
-    }
+    if (typeof window === "undefined") return;
+
+    const initRecaptcha = () => {
+      if (!window.recaptchaVerifier && document.getElementById("recaptcha-container")) {
+        window.recaptchaVerifier = new RecaptchaVerifier(
+          auth,
+          "recaptcha-container",
+          {
+            size: "normal",
+            callback: () => {
+              console.log("reCAPTCHA solved. Proceeding with OTP.");
+              setRecaptchaSolved(true);
+            },
+            appVerificationDisabledForTesting: process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATORS === "true",
+            "expired-callback": () => {
+              console.warn("reCAPTCHA expired.");
+              setRecaptchaSolved(false);
+            },
+          }
+        );
+
+        window.recaptchaVerifier.render().catch(console.error);
+      }
+    };
+
+    initRecaptcha();
   }, []);
 
   const sendOtp = async () => {

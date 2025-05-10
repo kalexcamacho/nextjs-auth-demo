@@ -11,7 +11,6 @@ export default function Home() {
       <RegisterWithEmail />
       <LoginWithEmail />
       <LoginWithPhone />
-      {/* Aquí puedes agregar <LoginWithEmail /> o <LoginWithPhone /> */}
     </main>
   );
 }

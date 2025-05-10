@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
-    "test": "jest"
+    "test": "jest",
+    "test:e2e": "playwright test",
+    "emulators": "firebase emulators:start",
+    "emulators:auth-firestore": "firebase emulators:start --only auth,firestore"
   },
   "dependencies": {
     "firebase": "^11.6.1",
@@ -29,6 +32,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@playwright/test": "^1.52.0",
     "babel-jest": "^29.7.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
