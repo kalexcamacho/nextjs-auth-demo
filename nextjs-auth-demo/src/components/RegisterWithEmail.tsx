@@ -7,11 +7,13 @@ import { auth } from "@/firebase/config";
 export default function RegisterWithEmail() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const registerWithEmail = async () => {
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
       console.log("Registered user:", result.user);
+      setSuccess(true);
     } catch (error) {
       console.error("Registration error:", error);
     }
@@ -42,6 +44,9 @@ export default function RegisterWithEmail() {
       >
         Register with Email
       </button>
+      {success && (
+        <p data-testid="register-success-message">Registration successful</p>
+      )}
     </div>
   );
 }
